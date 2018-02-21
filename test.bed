@@ -1,0 +1,15 @@
+#chr	start	stop	feature	size	col	chrCopy
+# comments start with hash symbol and are ignored
+# here is an example file that draws the different features in red, blue and green
+# the following line will draw a rectangle on the first copy of the chr1
+chr1	10000000	20000000	0	1	#FF0000	1
+# the following line will be for the second chromosome copy on chr2
+chr2	20000000	30000000	0	1	#FF0000	2
+# the next line will draw a rectangle covering only 50% of the width of the first chr copy
+chr2	40000000	50000000	0	0.5	#FF0000	1
+# this will make a circle on the second copy of chr3
+chr3	10000000	20000000	1	1	#00FF00	2
+# this is for making a triangle outside the chromosome, useful for showing insertions e.g.
+chr4	20000000	30000000	2	1	#0000FF	2
+# this will make a line to indicate event at a position
+chr5	10000000	10000001	3	1	#FF0000	1
