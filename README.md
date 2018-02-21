@@ -2,7 +2,7 @@
 
 ### Script for creating pretty chromosome paintings
 
-##### Author: Lavanya Rishishwar
+##### Author: Lavanya Rishishwar (lavanyarishishwar@gmail.com)
 
 The script presents a simple way to visualize features on human chromosome ideograms as shown in this article https://www.nature.com/articles/srep12376 and .  I have not implemented a full input file check routine so the script may behave weirdly if it doesn't recieve the correct file.  A bit clunky script, I know, but gets the job done.
 
