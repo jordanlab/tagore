@@ -9,6 +9,12 @@ The script presents a simple way to visualize features on human chromosome ideog
 ## Requirements
 * [RSVG](https://developer.gnome.org/rsvg/stable/)
 
+## Basic usage
+
+./daVinci.pl -i input.bed -o outputPrefix
+
+input.bed has to be be in a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
+
 ## Input file description 
 ```
 #chr	start	stop	feature	size	col	chrCopy
