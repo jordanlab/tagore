@@ -1,20 +1,46 @@
+   * [da Vinci](#da-vinci)
+      * [Installation](#installation)
+         * [Requirements](#requirements)
+      * [Quick start](#quick-start)
+      * [Usage](#usage)
+      * [Input file description](#input-file-description)
+
 # da Vinci
-da Vinci is a simple way to visualize features on human chromosome ideograms as shown in this article https://www.nature.com/articles/srep12376
 
-### Script for creating pretty chromosome paintings
+`da Vinci` is a simple way to visualize features on human chromosome ideograms as shown in this article: https://www.nature.com/articles/srep12376
 
-##### Author: Lavanya Rishishwar (Lrishishwar@ihrc.com)
+`da Vinci` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
 
+![](example_ideogram/example.png|width=250px)
 
-## Requirements
+## Installation
+
+`da Vinci` is a simple Perl script that uses the RSVG library and has no other depenendies (Perl modules or programs).
+
+### Requirements
+* Perl 5
 * [RSVG](https://developer.gnome.org/rsvg/stable/)
-* python-rsvg, available in most package managers
 
-## Basic usage
+## Quick start
+```bash
+./daVinci.pl -i example_ideogram/test.bed -o example_ideogram/example
+```
 
-./daVinci.pl -i input.bed -o outputPrefix
+## Usage
+```bash
+./daVinci.pl -i <STRING input bed file> [-o <STRING output prefix. Default: out>]
+```
+The input file has is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
 
-input.bed has to be be in a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
+Helper scripts for converting RFmix and ADMIXTURE outputs are included in the `scripts/` folder.
+
+There is a more complete example of a full chromosome painting using RFmix output can be seen by running:
+
+```bash
+./scripts/rfmix2davinci.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed --chr2 example_ideogram/1KGP-MXL104_chr2.bed --out example_ideogram/1KGP-MXL104_davinci.bed
+./daVinci.pl -i example_ideogram/1KGP-MXL104_davinci.bed -o example_ideogram/1KGP-MXL104
+
+```
 
 ## Input file description
 ```
