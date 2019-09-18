@@ -1,4 +1,4 @@
-   * [daVinci](#davinci)
+   * [tagore](#tagore)
       * [Installation](#installation)
          * [Requirements](#requirements)
          * [Conversion script Python dependency](#conversion-script-python-dependency)
@@ -6,17 +6,23 @@
       * [Usage](#usage)
       * [Input file description](#input-file-description)
 
-# daVinci
+# tagore
 
-`daVinci` is a simple way to visualize features on human chromosome ideograms as shown in this article: https://www.nature.com/articles/srep12376
+`tagore` is a simple way to visualize features on human chromosome ideograms as shown in this article: https://www.nature.com/articles/srep12376
 
-`daVinci` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
+`tagore` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
 
-![](davinci.png)
+![tagore](https://github.com/jordanlab/tagore/raw/master/tagore.png)
 
 ## Installation
 
-`daVinci` is a simple Python script that uses the RSVG library and has no other depenendies.
+`tagore` is a simple Python script that uses the RSVG library and has no other depenendies.
+
+```bash
+pip install tagore
+tagore --version
+# tagore (version 1.0)
+```
 
 ### Requirements
 * Python 3.6+
@@ -31,14 +37,14 @@
 
 ## Quick start
 ```bash
-./daVinci.py --input example_ideogram/test.bed --prefix example_ideogram/example
+tagore --input example_ideogram/test.bed --prefix example_ideogram/example
 ```
 
 ## Usage
 ```
-usage: daVinci.py [-h] [--version] -i <input.bed> [-p [output file prefix]] [-v] [-f]
+usage: tagore.py [-h] [--version] -i <input.bed> [-p [output file prefix]] [-v] [-f]
 
-daVinci: a utility for illustrating human chromosomes
+tagore: a utility for illustrating human chromosomes
 
 optional arguments:
   -h, --help                                              show this help message and exit
@@ -56,11 +62,11 @@ Helper scripts for converting RFmix and ADMIXTURE outputs are included in the `s
 There is a more complete example of a full chromosome painting using RFmix output can be seen by running:
 
 ```bash
-./scripts/rfmix2davinci.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
+./scripts/rfmix2tagore.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
 	--chr2 example_ideogram/1KGP-MXL104_chr2.bed \
-	--out example_ideogram/1KGP-MXL104_davinci.bed
+	--out example_ideogram/1KGP-MXL104_tagore.bed
 
-./daVinci.py -input example_ideogram/1KGP-MXL104_davinci.bed \
+tagore -input example_ideogram/1KGP-MXL104_tagore.bed \
 	--prefix example_ideogram/1KGP-MXL104
 
 ```
@@ -85,3 +91,4 @@ Each column is explained below:
 5. *size* - The horizontal size of the feature. Should range between 0 and 1.
 6. *color* - Specify the color of the genomic feature with a hex value (#FF0000 for red, etc.)
 7. *chrCopy* - Specify the chromosome copy on which the feature should be drawn (1 or 2).  To draw the same feature on both chromosomes, you must specify the feature twice
+

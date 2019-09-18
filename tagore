@@ -139,16 +139,17 @@ def draw(opts):
 
 
 if __name__ == "__main__":
-	parser = ArgumentParser(prog="daVinci.py",
+	parser = ArgumentParser(prog="tagore",
 							add_help=True,
 							description='''
-							da Vinci: a utility for illustrating human chromosomes
+							tagore: a utility for illustrating human chromosomes
+							https://github.com/jordanlab/tagore
 							''',
 							formatter_class=lambda prog: HelpFormatter(prog, width=120, max_help_position=120))
 
 	parser.add_argument('--version', action='version',
 						help='Print the software version.',
-						version='da Vinci (version {})'.format(VERSION))
+						version='tagore (version {})'.format(VERSION))
 
 	# Input arguments
 	parser.add_argument('-i', '--input', required=True, default=None, metavar='<input.bed>',
@@ -172,7 +173,7 @@ if __name__ == "__main__":
 	try:
 		base = open('base.svg.p', 'rb')
 	except (IOError, EOFError) as e:
-		print("\033[91mCould not open base.svg.p, this file must be in the same folder as daVinci.py!\033[0m")
+		print("\033[91mCould not open base.svg.p, this file must be in the same folder as tagore!\033[0m")
 		raise(e)
 	__head__, __tail__ = pickle.load(base)
 	if opts.verbose: print(f"\033[94mDrawing chromosome ideogram using {opts.input}\033[0m")
@@ -180,7 +181,7 @@ if __name__ == "__main__":
 		print(f"\033[93m'{opts.prefix}.svg' already exists.\033[0m")
 		ow = input(f"Overwrite {opts.prefix}.svg? [Y/n]:  ") or "y"
 		if ow.lower() != "y":
-			print(f"\033[93m'da Vinci will now exit...\033[0m")
+			print(f"\033[93m'tagore will now exit...\033[0m")
 			sys.exit()
 		else:
 			print(f"\033[94mOverwriting existing file and saving to: {opts.prefix}.svg\033[0m")
