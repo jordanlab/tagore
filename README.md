@@ -11,24 +11,33 @@
 
 `da Vinci` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
 
-![](example_ideogram/example.png|width=250px)
+<!-- ![](example_ideogram/example.png|width=250px) -->
 
 ## Installation
 
-`da Vinci` is a simple Perl script that uses the RSVG library and has no other depenendies (Perl modules or programs).
+`da Vinci` is a simple Python script that uses the RSVG library and has no other depenendies.
 
 ### Requirements
-* Perl 5
+* Python 3.6+
 * [RSVG](https://developer.gnome.org/rsvg/stable/)
 
 ## Quick start
 ```bash
-./daVinci.pl -i example_ideogram/test.bed -o example_ideogram/example
+./daVinci.py --input example_ideogram/test.bed -prefix example_ideogram/example
 ```
 
 ## Usage
 ```bash
-./daVinci.pl -i <STRING input bed file> [-o <STRING output prefix. Default: out>]
+usage: daVinci.py [-h] [--version] --input <input.bed> [--prefix [out prefix]]
+
+da Vinci: a utility for illustrating human chromosomes
+
+optional arguments:
+  -h, --help             show this help message and exit
+  --version              Print the software version.
+  --input <input.bed>    Input BED-like file
+  --prefix [out prefix]  Output prefix
+
 ```
 The input file has is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
 
@@ -38,7 +47,7 @@ There is a more complete example of a full chromosome painting using RFmix outpu
 
 ```bash
 ./scripts/rfmix2davinci.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed --chr2 example_ideogram/1KGP-MXL104_chr2.bed --out example_ideogram/1KGP-MXL104_davinci.bed
-./daVinci.pl -i example_ideogram/1KGP-MXL104_davinci.bed -o example_ideogram/1KGP-MXL104
+./daVinci.py -iinput example_ideogram/1KGP-MXL104_davinci.bed --prefix example_ideogram/1KGP-MXL104
 
 ```
 
