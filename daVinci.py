@@ -15,29 +15,29 @@ from argparse import ArgumentParser, HelpFormatter
 VERSION = 1.0
 
 coordinates = {
-	"1": {"cx": 1320.9, "cy": 1.5, "ht": 1654.5, "wd": 118.6},
-	"2": {"cx": 1493.7, "cy": 43.6, "ht": 1612.4, "wd": 118.6},
-	"3": {"cx": 1669.9, "cy": 341.4, "ht": 1314.7, "wd": 118.6},
-	"4": {"cx": 1847.9, "cy": 517.9, "ht": 1138.1, "wd": 118.6},
-	"5": {"cx": 2027.7, "cy": 461, "ht": 1195.1, "wd": 118.6},
-	"6": {"cx": 2204.7, "cy": 524.2, "ht": 1131.8, "wd": 118.6},
-	"7": {"cx": 2390.5, "cy": 608.5, "ht": 1047.5, "wd": 118.6},
-	"8": {"cx": 2565.2, "cy": 692.8, "ht": 963.2, "wd": 118.6},
-	"9": {"cx": 2746.8, "cy": 724.4, "ht": 931.6, "wd": 118.6},
-	"10": {"cx": 2926.1, "cy": 766.6, "ht": 889.4, "wd": 118.6},
-	"11": {"cx": 3103.8, "cy": 766.6, "ht": 889.4, "wd": 118.6},
-	"12": {"cx": 3287.9, "cy": 769.7, "ht": 886.3, "wd": 118.6},
-	"13": {"cx": 1321.6, "cy": 2068.8, "ht": 766.1, "wd": 118.6},
-	"14": {"cx": 1493.9, "cy": 2121.5, "ht": 713.4, "wd": 118.6},
-	"15": {"cx": 1669.8, "cy": 2153.1, "ht": 681.8, "wd": 118.6},
-	"16": {"cx": 1849, "cy": 2232.2, "ht": 602.8, "wd": 118.6},
-	"17": {"cx": 2033.5, "cy": 2290.7, "ht": 544.3, "wd": 118.6},
-	"18": {"cx": 2208, "cy": 2313.9, "ht": 521.1, "wd": 118.6},
-	"19": {"cx": 2391.8, "cy": 2437.2, "ht": 397.8, "wd": 118.6},
-	"20": {"cx": 2566.7, "cy": 2416.1, "ht": 418.9, "wd": 118.6},
-	"21": {"cx": 2745.3, "cy": 2510.9, "ht": 324.1, "wd": 118.6},
-	"22": {"cx": 2929.2, "cy": 2489.8, "ht": 345.1, "wd": 118.6},
-	"X": {"cx": 3103.3, "cy": 1799.6, "ht": 1035.4, "wd": 59},
+	"1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "wd": 118.6},
+	"2": {"cx": 301.4, "cy": 43.6, "ht": 1612.4, "wd": 118.6},
+	"3": {"cx": 477.6, "cy": 341.4, "ht": 1314.7, "wd": 118.6},
+	"4": {"cx": 655.6, "cy": 517.9, "ht": 1138.1, "wd": 118.6},
+	"5": {"cx": 835.4, "cy": 461, "ht": 1195.1, "wd": 118.6},
+	"6": {"cx": 1012.4, "cy": 524.2, "ht": 1131.8, "wd": 118.6},
+	"7": {"cx": 1198.2, "cy": 608.5, "ht": 1047.5, "wd": 118.6},
+	"8": {"cx": 1192.3, "cy": 692.8, "ht": 963.2, "wd": 118.6},
+	"9": {"cx": 1554.5, "cy": 724.4, "ht": 931.6, "wd": 118.6},
+	"10": {"cx": 1733.8, "cy": 766.6, "ht": 889.4, "wd": 118.6},
+	"11": {"cx": 1911.5, "cy": 766.6, "ht": 889.4, "wd": 118.6},
+	"12": {"cx": 2095.6, "cy": 769.7, "ht": 886.3, "wd": 118.6},
+	"13": {"cx": 129.3, "cy": 2068.8, "ht": 766.1, "wd": 118.6},
+	"14": {"cx": 301.6, "cy": 2121.5, "ht": 713.4, "wd": 118.6},
+	"15": {"cx": 477.5, "cy": 2153.1, "ht": 681.8, "wd": 118.6},
+	"16": {"cx": 656.7, "cy": 2232.2, "ht": 602.8, "wd": 118.6},
+	"17": {"cx": 841.2, "cy": 2290.7, "ht": 544.3, "wd": 118.6},
+	"18": {"cx": 1015.7, "cy": 2313.9, "ht": 521.1, "wd": 118.6},
+	"19": {"cx": 1199.5, "cy": 2437.2, "ht": 397.8, "wd": 118.6},
+	"20": {"cx": 1374.4, "cy": 2416.1, "ht": 418.9, "wd": 118.6},
+	"21": {"cx": 1553, "cy": 2510.9, "ht": 324.1, "wd": 118.6},
+	"22": {"cx": 1736.9, "cy": 2489.8, "ht": 345.1, "wd": 118.6},
+	"X": {"cx": 1911, "cy": 1799.6, "ht": 1035.4, "wd": 59},
 }
 
 chromSizes = {
@@ -59,7 +59,7 @@ def draw(opts):
 	svg_fn = f"{opts.prefix}.svg"
 	try:
 		svg_fh = open(svg_fn, 'w')
-		svg_fh.write(__CHR__)
+		svg_fh.write(__head__)
 	except (IOError, EOFError) as e:
 		print("Error opening output file!")
 		raise(e)
@@ -134,7 +134,7 @@ def draw(opts):
 		else:
 			print(f"Feature type, {feature}, unclear.  Please use either 0, 1, 2 or 3.  Skipping...")
 			continue
-	svg_fh.write("</svg>")
+	svg_fh.write(__tail__)
 	if opts.verbose: print(f"\033[92mSuccessfully created SVG\033[0m")
 
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
 	except (IOError, EOFError) as e:
 		print("\033[91mCould not open base.svg.p, this file must be in the same folder as daVinci.py!\033[0m")
 		raise(e)
-	__CHR__ = pickle.load(base)
+	__head__, __tail__ = pickle.load(base)
 	if opts.verbose: print(f"\033[94mDrawing chromosome ideogram using {opts.input}\033[0m")
 	if os.path.exists(f"{opts.prefix}.svg") and opts.force is False:
 		print(f"\033[93m'{opts.prefix}.svg' already exists.\033[0m")
@@ -195,7 +195,5 @@ if __name__ == "__main__":
 		raise e
 	finally:
 		if opts.verbose: print(f"\033[92mSuccessfully converted SVG to PNG\033[0m")
-
-
 
 
