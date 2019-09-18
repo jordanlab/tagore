@@ -13,8 +13,6 @@ from argparse import ArgumentParser, HelpFormatter
 
 
 VERSION = 1.0
-with open('base.svg.p', 'rb') as base:
-	__CHR__ = pickle.load(base)
 
 coordinates = {
 	"1": {"cx": 1320.9, "cy": 1.5, "ht": 1654.5, "wd": 118.6},
@@ -171,6 +169,12 @@ if __name__ == "__main__":
 	if shutil.which("rsvg", mode=os.X_OK) is None:
 		print(f"\033[91mCould not find `rsvg` in PATH.\033[0m")
 		sys.exit()
+	try:
+		base = open('base.svg.p', 'rb')
+	except (IOError, EOFError) as e:
+		print("\033[91mCould not open base.svg.p, this file must be in the same folder as daVinci.py!\033[0m")
+		raise(e)
+	__CHR__ = pickle.load(base)
 	if opts.verbose: print(f"\033[94mDrawing chromosome ideogram using {opts.input}\033[0m")
 	if os.path.exists(f"{opts.prefix}.svg") and opts.force is False:
 		print(f"\033[93m'{opts.prefix}.svg' already exists.\033[0m")
