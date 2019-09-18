@@ -1,6 +1,7 @@
    * [da Vinci](#da-vinci)
       * [Installation](#installation)
          * [Requirements](#requirements)
+         * [Conversion script Python dependency](#conversion-script-python-dependency)
       * [Quick start](#quick-start)
       * [Usage](#usage)
       * [Input file description](#input-file-description)
@@ -20,6 +21,13 @@
 ### Requirements
 * Python 3.6+
 * [RSVG](https://developer.gnome.org/rsvg/stable/)
+
+### Conversion script Python dependency
+* [Click](https://click.palletsprojects.com/en/7.x/)
+
+```bash
+ pip install click
+ ```
 
 ## Quick start
 ```bash
