@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tagore",
-    version="1.0",
+    version="1.0.post1",
     author="Applied Bioinformatics Laboratory",
     author_email="abil@ihrc.com",
     description="A simple way to visualize features on human chromosome ideograms as shown in this article",
@@ -26,5 +26,5 @@ setuptools.setup(
     install_requires=['click'],
     keywords = ['Human', 'chromosome', 'ideogram', 'visualization'],
     scripts = ['tagore', 'scripts/rfmix2tagore.py'],
-    data_files = [('', ['base.svg.p'])]
+    data_files = [('lib/tagore-data/', ['base.svg.p'])]
 )

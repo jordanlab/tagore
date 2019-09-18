@@ -170,8 +170,9 @@ if __name__ == "__main__":
 	if shutil.which("rsvg", mode=os.X_OK) is None:
 		print(f"\033[91mCould not find `rsvg` in PATH.\033[0m")
 		sys.exit()
+	base_path = os.path.join(sys.prefix, 'lib', 'tagore-data', 'base.svg.p')
 	try:
-		base = open('base.svg.p', 'rb')
+		base = open(base_path, 'rb')
 	except (IOError, EOFError) as e:
 		print("\033[91mCould not open base.svg.p, this file must be in the same folder as tagore!\033[0m")
 		raise(e)
