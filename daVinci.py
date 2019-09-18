@@ -3,8 +3,10 @@ __author__ = ["Lavanya Rishishar", "Aroon Chande"]
 __copyright__ = "Copyright 2019, Applied Bioinformatics Lab"
 __license__ = "GPLv3"
 
+import os
 import pickle
 import re
+import shutil
 import subprocess
 import sys
 from argparse import ArgumentParser, HelpFormatter
@@ -135,7 +137,7 @@ def draw(opts):
 			print(f"Feature type, {feature}, unclear.  Please use either 0, 1, 2 or 3.  Skipping...")
 			continue
 	svg_fh.write("</svg>")
-	print(f"\033[92mSuccessfully created SVG\033[0m")
+	if opts.verbose: print(f"\033[92mSuccessfully created SVG\033[0m")
 
 
 if __name__ == "__main__":
@@ -151,24 +153,44 @@ if __name__ == "__main__":
 						version='da Vinci (version {})'.format(VERSION))
 
 	# Input arguments
-	parser.add_argument('--input', required=True, default=None, metavar='<input.bed>',
+	parser.add_argument('-i', '--input', required=True, default=None, metavar='<input.bed>',
 							help='Input BED-like file')
-	parser.add_argument('--prefix', required=False, default="out", metavar='[output file prefix]',
+	parser.add_argument('-p', '--prefix', required=False, default="out", metavar='[output file prefix]',
 							help='Output prefix [Default: "out"]')
+	parser.add_argument('-v', '--verbose', required=False, default=False,
+							help="Display verbose output",
+                    		action="store_true")
+	parser.add_argument('-f', '--force', required=False, default=False,
+							help="Overwrite output files if they exist already",
+                    		action="store_true")
 	opts, unknown_args = parser.parse_known_args()
 	if unknown_args:
-		print("Unknown arguments were supplied: {}".format(' '.join(unknown_args)))
-	print(f"\033[94mDrawing SVG using {opts.input}\033[0m")
-	print(f"\033[94mSaving to {opts.prefix}.svg\033[0m")
+		print("\033[93mOne or more unknown arguments were supplied:\033[0m {}\n".format(' '.join(unknown_args)))
+		parser.print_help()
+		sys.exit()
+	if shutil.which("rsvg", mode=os.X_OK) is None:
+		print(f"\033[91mCould not find `rsvg` in PATH.\033[0m")
+		sys.exit()
+	if opts.verbose: print(f"\033[94mDrawing chromosome ideogram using {opts.input}\033[0m")
+	if os.path.exists(f"{opts.prefix}.svg") and opts.force is False:
+		print(f"\033[93m'{opts.prefix}.svg' already exists.\033[0m")
+		ow = input(f"Overwrite {opts.prefix}.svg? [Y/n]:  ") or "y"
+		if ow.lower() != "y":
+			print(f"\033[93m'da Vinci will now exit...\033[0m")
+			sys.exit()
+		else:
+			print(f"\033[94mOverwriting existing file and saving to: {opts.prefix}.svg\033[0m")
+	else:
+		if opts.verbose: print(f"\033[94mSaving to: {opts.prefix}.svg\033[0m")
 	draw(opts)
-	print(f"\033[94mConverting to PNG...\033[0m")
+	if opts.verbose: print(f"\033[94mConverting {opts.prefix}.svg -> {opts.prefix}.png\033[0m")
 	try:
 		subprocess.check_output(f"rsvg {opts.prefix}.svg {opts.prefix}.png", shell=True)
 	except subprocess.CalledProcessError as e:
-		print(f"\033[91mFailed SVG to PNG conversion...\033[0m")
+		if opts.verbose: print(f"\033[91mFailed SVG to PNG conversion...\033[0m")
 		raise e
 	finally:
-		print(f"\033[92mSuccessfully converted SVG to PNG\033[0m")
+		if opts.verbose: print(f"\033[92mSuccessfully converted SVG to PNG\033[0m")
 
 
 

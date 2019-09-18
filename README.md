@@ -36,15 +36,17 @@
 
 ## Usage
 ```
-usage: daVinci.py [-h] [--version] --input <input.bed> [--prefix [output file prefix]]
+usage: daVinci.py [-h] [--version] -i <input.bed> [-p [output file prefix]] [-v] [-f]
 
 da Vinci: a utility for illustrating human chromosomes
 
 optional arguments:
-  -h, --help                     show this help message and exit
-  --version                      Print the software version.
-  --input <input.bed>            Input BED-like file
-  --prefix [output file prefix]  Output prefix [Default: "out"]
+  -h, --help                                              show this help message and exit
+  --version                                               Print the software version.
+  -i <input.bed>, --input <input.bed>                     Input BED-like file
+  -p [output file prefix], --prefix [output file prefix]  Output prefix [Default: "out"]
+  -v, --verbose                                           Display verbose output
+  -f, --force                                             Overwrite output files if they exist already
 
 ```
 The input file is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
