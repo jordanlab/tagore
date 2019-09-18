@@ -31,23 +31,23 @@
 
 ## Quick start
 ```bash
-./daVinci.py --input example_ideogram/test.bed -prefix example_ideogram/example
+./daVinci.py --input example_ideogram/test.bed --prefix example_ideogram/example
 ```
 
 ## Usage
-```bash
-usage: daVinci.py [-h] [--version] --input <input.bed> [--prefix [out prefix]]
+```
+usage: daVinci.py [-h] [--version] --input <input.bed> [--prefix [output file prefix]]
 
 da Vinci: a utility for illustrating human chromosomes
 
 optional arguments:
-  -h, --help             show this help message and exit
-  --version              Print the software version.
-  --input <input.bed>    Input BED-like file
-  --prefix [out prefix]  Output prefix
+  -h, --help                     show this help message and exit
+  --version                      Print the software version.
+  --input <input.bed>            Input BED-like file
+  --prefix [output file prefix]  Output prefix [Default: "out"]
 
 ```
-The input file has is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
+The input file is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
 
 Helper scripts for converting RFmix and ADMIXTURE outputs are included in the `scripts/` folder.
 

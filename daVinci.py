@@ -153,8 +153,8 @@ if __name__ == "__main__":
 	# Input arguments
 	parser.add_argument('--input', required=True, default=None, metavar='<input.bed>',
 							help='Input BED-like file')
-	parser.add_argument('--prefix', required=False, default="out", metavar='[out prefix]',
-							help='Output prefix')
+	parser.add_argument('--prefix', required=False, default="out", metavar='[output file prefix]',
+							help='Output prefix [Default: "out"]')
 	opts, unknown_args = parser.parse_known_args()
 	if unknown_args:
 		print("Unknown arguments were supplied: {}".format(' '.join(unknown_args)))
