@@ -12,7 +12,7 @@
 
 `da Vinci` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
 
-<!-- ![](example_ideogram/example.png|width=250px) -->
+![](davinci.png)
 
 ## Installation
 
@@ -56,8 +56,12 @@ Helper scripts for converting RFmix and ADMIXTURE outputs are included in the `s
 There is a more complete example of a full chromosome painting using RFmix output can be seen by running:
 
 ```bash
-./scripts/rfmix2davinci.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed --chr2 example_ideogram/1KGP-MXL104_chr2.bed --out example_ideogram/1KGP-MXL104_davinci.bed
-./daVinci.py -iinput example_ideogram/1KGP-MXL104_davinci.bed --prefix example_ideogram/1KGP-MXL104
+./scripts/rfmix2davinci.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
+	--chr2 example_ideogram/1KGP-MXL104_chr2.bed \
+	--out example_ideogram/1KGP-MXL104_davinci.bed
+
+./daVinci.py -input example_ideogram/1KGP-MXL104_davinci.bed \
+	--prefix example_ideogram/1KGP-MXL104
 
 ```
 
