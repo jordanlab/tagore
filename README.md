@@ -1,16 +1,16 @@
-   * [tagore](#tagore)
-      * [Installation](#installation)
-         * [Requirements](#requirements)
-         * [Conversion script Python dependency](#conversion-script-python-dependency)
-      * [Quick start](#quick-start)
-      * [Usage](#usage)
-      * [Input file description](#input-file-description)
+   * [tagore](#tagore)  
+      * [Installation](#installation)  
+         * [Requirements](#requirements)  
+      * [Quick start](#quick-start)  
+      * [Usage](#usage)  
+      * [Input file description](#input-file-description)  
+      * [Etymology](#etymology)  
 
 # tagore
 
 `tagore` is a simple way to visualize features on human chromosome ideograms as shown in this article: https://www.nature.com/articles/srep12376
 
-`tagore` was designed to allow everyone to create 23AndMe style chromosome painting diagrams.
+`tagore` was designed to allow everyone to create 23andMe style chromosome painting diagrams.
 
 ![tagore](https://github.com/jordanlab/tagore/raw/master/tagore.png)
 
@@ -27,13 +27,7 @@ tagore --version
 ### Requirements
 * Python 3.6+
 * [RSVG](https://developer.gnome.org/rsvg/stable/)
-
-### Conversion script Python dependency
-* [Click](https://click.palletsprojects.com/en/7.x/)
-
-```bash
- pip install click
- ```
+* [Click](https://click.palletsprojects.com/en/7.x/) (automatically installed if `pip` is used)
 
 ## Quick start
 ```bash
@@ -57,9 +51,9 @@ optional arguments:
 ```
 The input file is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
 
-Helper scripts for converting RFmix and ADMIXTURE outputs are included in the `scripts/` folder.
+Helper scripts for converting RFMix and ADMIXTURE outputs are included in the `scripts/` folder.
 
-There is a more complete example of a full chromosome painting using RFmix output can be seen by running:
+A more complete example of a full chromosome painting using an RFMix output can be seen by running:
 
 ```bash
 ./scripts/rfmix2tagore.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
@@ -92,3 +86,10 @@ Each column is explained below:
 6. *color* - Specify the color of the genomic feature with a hex value (#FF0000 for red, etc.)
 7. *chrCopy* - Specify the chromosome copy on which the feature should be drawn (1 or 2).  To draw the same feature on both chromosomes, you must specify the feature twice
 
+
+## Etymology
+
+[Tagore](https://en.wikipedia.org/wiki/Rabindranath_Tagore) (/tæˈgɔːr/) was a prolific songwriter,
+ artist, and influential poet of 19th and 20th century India.  Notably, Tagore spoke out against
+ racial prejudice and espoused the princple respect for all people, regardless of ancestry or
+ ethnic bacground.

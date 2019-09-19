@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tagore",
-    version="1.0.post2",
+    version="1.0.post3",
     author="Applied Bioinformatics Laboratory",
     author_email="abil@ihrc.com",
-    description="A simple way to visualize features on human chromosome ideograms as shown in this article",
+    description="A simple way to visualize features on human chromosome ideograms",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jordanlab/tagore",

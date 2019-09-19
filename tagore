@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = 1.0
+VERSION = '1.0.post3'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -64,6 +64,7 @@ def draw(arguments):
     '''
     Create the SVG object
     '''
+    polygons = ""
     try:
         input_fh = open(arguments.input, 'r')
     except (IOError, EOFError) as input_fh_e:
@@ -139,8 +140,8 @@ def draw(arguments):
                 sx_pos = -38.2*size
             y_pos = COORDINATES[chrm]["cy"]+(feat_start+feat_end)/2
             sy_pos = 21.5*size
-            svg_fh.write(f"<polygon fill=\"{col}\" points=\"{x_pos-sx_pos},{y_pos-sy_pos} \
-                {x_pos},{y_pos} {x_pos-sx_pos},{y_pos+sy_pos}\"/>" + "\n")
+            polygons += f"<polygon fill=\"{col}\" points=\"{x_pos-sx_pos},{y_pos-sy_pos} \
+            {x_pos},{y_pos} {x_pos-sx_pos},{y_pos+sy_pos}\"/>" + "\n"
         elif feature == 3:  # Line
             y_pos1 = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
             y_pos2 = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
@@ -160,6 +161,9 @@ def draw(arguments):
             print(f"Feature type, {feature}, unclear. Please use either 0, 1, 2 or 3. Skipping...")
             continue
     svg_fh.write(__tail__)
+    svg_fh.write(polygons)
+    svg_fh.write("</svg>")
+    svg_fh.close()
     printif(f"\033[92mSuccessfully created SVG\033[0m", ARGS.verbose)
 
 
@@ -174,7 +178,7 @@ if __name__ == "__main__":
                                                                        max_help_position=120))
 
     PARSER.add_argument('--version', action='version',
-                        help='Print the software version.',
+                        help='Print the software version',
                         version='tagore (version {})'.format(VERSION))
 
     # Input arguments
