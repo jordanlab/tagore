@@ -21,7 +21,7 @@
 ```bash
 pip install tagore
 tagore --version
-# tagore (version 1.0)
+# tagore (version 1.0.1)
 ```
 
 ### Requirements
@@ -34,7 +34,7 @@ tagore --version
 The demo data consists of [Catalogue of Somatic Mutations in Cancer (COSMIC) Cancer Gene Census](https://www.nature.com/articles/s41568-018-0060-1) genes and 100 randomly simulated mutations.  Points represent single nucleotide variants (i.e. variant present in <3 samples); triangles represent single nucleotide polymorphisms (i.e. variants found in many samples); and short lines (single chromosome) represent known INDEL sites.
 
 ```bash
-tagore --input example_ideogram/test.bed --prefix example_ideogram/example
+tagore --input example_ideogram/test.bed --prefix example_ideogram/example -vf
 ```
 
 ## Usage
@@ -64,7 +64,9 @@ A more complete example of a full chromosome painting using an RFMix output can 
 	--out example_ideogram/1KGP-MXL104_tagore.bed
 
 tagore -input example_ideogram/1KGP-MXL104_tagore.bed \
-	--prefix example_ideogram/1KGP-MXL104
+	--prefix example_ideogram/1KGP-MXL104 \
+  --build hg37
+  --verbose
 
 ```
 

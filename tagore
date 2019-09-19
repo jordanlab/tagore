@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = '1.0.post3'
+VERSION = '1.0.1'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -45,12 +45,22 @@ COORDINATES = {
 }
 
 CHROM_SIZES = {
-    "1": 249250621, "2": 243199373, "3": 198022430, "4": 191154276,
-    "5": 180915260, "6": 171115067, "7": 159138663, "8": 146364022,
-    "9": 141213431, "10": 135534747, "11": 135006516, "12": 133851895,
-    "13": 115169878, "14": 107349540, "15": 102531392, "16": 90354753,
-    "17": 81195210, "18": 78077248, "19": 59128983, "20": 63025520,
-    "21": 48129895, "22": 51304566, "X": 155270560, "Y": 59373566
+    "hg37": {
+        "1": 249250621, "2": 243199373, "3": 198022430, "4": 191154276,
+        "5": 180915260, "6": 171115067, "7": 159138663, "8": 146364022,
+        "9": 141213431, "10": 135534747, "11": 135006516, "12": 133851895,
+        "13": 115169878, "14": 107349540, "15": 102531392, "16": 90354753,
+        "17": 81195210, "18": 78077248, "19": 59128983, "20": 63025520,
+        "21": 48129895, "22": 51304566, "X": 155270560, "Y": 59373566
+    },
+    "hg38": {
+        "1": 248956422, "2": 242193529, "3": 198295559, "4": 190214555,
+        "5": 181538259, "6": 170805979, "7": 159345973, "8": 145138636,
+        "9": 138394717, "10": 133797422, "11": 135086622, "12": 133275309,
+        "13": 114364328, "14": 107043718, "15": 101991189, "16": 90338345,
+        "17": 83257441, "18": 80373285, "19": 58617616, "20": 64444167,
+        "21": 46709983, "22": 50818468, "X": 156040895, "Y": 57227415
+    },
 }
 
 def printif(statement, condition):
@@ -107,8 +117,8 @@ def draw(arguments):
             continue
         line_num = line_num + 1
         if feature == 0:  # Rectangle
-            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
-            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
+            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
+            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
             width = COORDINATES[chrm]["width"]*size/2
             if chrcopy == 1:
                 x_pos = COORDINATES[chrm]["cx"] - width
@@ -119,8 +129,8 @@ def draw(arguments):
             svg_fh.write(f"<rect x=\"{x_pos}\" y=\"{y_pos}\" fill=\"{col}\" width=\"{width}\"\
              height=\"{height}\"/>" + "\n")
         elif feature == 1:  # Circle
-            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
-            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
+            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
+            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
             radius = COORDINATES[chrm]["width"]*size/4
             if chrcopy == 1:
                 x_pos = COORDINATES[chrm]["cx"] - COORDINATES[chrm]["width"]/4
@@ -130,8 +140,8 @@ def draw(arguments):
             svg_fh.write(f"<circle fill=\"{col}\" cx=\"{x_pos}\" cy=\"{y_pos}\"\
              r=\"{radius}\"/>" + "\n")
         elif feature == 2:  # Triangle
-            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
-            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
+            feat_start = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
+            feat_end = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
             if chrcopy == 1:
                 x_pos = COORDINATES[chrm]["cx"] - COORDINATES[chrm]["width"]/2
                 sx_pos = 38.2*size
@@ -143,8 +153,8 @@ def draw(arguments):
             polygons += f"<polygon fill=\"{col}\" points=\"{x_pos-sx_pos},{y_pos-sy_pos} \
             {x_pos},{y_pos} {x_pos-sx_pos},{y_pos+sy_pos}\"/>" + "\n"
         elif feature == 3:  # Line
-            y_pos1 = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
-            y_pos2 = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[chrm]
+            y_pos1 = start*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
+            y_pos2 = stop*COORDINATES[chrm]["ht"]/CHROM_SIZES[arguments.build][chrm]
             y_pos = (y_pos1+y_pos2)/2
             y_pos += COORDINATES[chrm]["cy"]
             if chrcopy == 1:
@@ -187,16 +197,22 @@ if __name__ == "__main__":
     PARSER.add_argument('-p', '--prefix', required=False, default="out",
                         metavar='[output file prefix]',
                         help='Output prefix [Default: "out"]')
-    PARSER.add_argument('-v', '--verbose', required=False, default=False,
-                        help="Display verbose output",
-                        action="store_true")
+    PARSER.add_argument('-b', '--build', required=False, default="hg38",
+                        metavar='[hg78/hg38]',
+                        help="Human genome build to use [Default: hg38]")
     PARSER.add_argument('-f', '--force', required=False, default=False,
                         help="Overwrite output files if they exist already",
+                        action="store_true")
+    PARSER.add_argument('-v', '--verbose', required=False, default=False,
+                        help="Display verbose output",
                         action="store_true")
     ARGS, UNKARGS = PARSER.parse_known_args()
     if UNKARGS:
         print(f"\033[93mOne or more unknown arguments were supplied:\033[0m {' '.join(UNKARGS)}\n")
         PARSER.print_help()
+        sys.exit()
+    if ARGS.build not in ['hg37', 'hg38']:
+        print(f"\033[91mBuild must be either 'hg37' or 'hg38', you supplied {ARGS.build}.\033[0m")
         sys.exit()
     if shutil.which("rsvg", mode=os.X_OK) is None:
         print(f"\033[91mCould not find `rsvg` in PATH.\033[0m")

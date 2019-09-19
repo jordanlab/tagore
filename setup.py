@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="tagore",
-    version="1.0.post3",
+    version="1.0.1",
     author="Applied Bioinformatics Laboratory",
     author_email="abil@ihrc.com",
     description="A simple way to visualize features on human chromosome ideograms",
