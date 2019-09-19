@@ -30,6 +30,9 @@ tagore --version
 * [Click](https://click.palletsprojects.com/en/7.x/) (automatically installed if `pip` is used)
 
 ## Quick start
+
+The demo data consists of [Catalogue of Somatic Mutations in Cancer (COSMIC) Cancer Gene Census](https://www.nature.com/articles/s41568-018-0060-1) genes and 100 randomly simulated mutations.  Points represent single nucleotide variants (i.e. variant present in <3 samples); triangles represent single nucleotide polymorphisms (i.e. variants found in many samples); and short lines (single chromosome) represent known INDEL sites.
+
 ```bash
 tagore --input example_ideogram/test.bed --prefix example_ideogram/example
 ```
