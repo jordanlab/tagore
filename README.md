@@ -39,17 +39,18 @@ tagore --input example_ideogram/test.bed --prefix example_ideogram/example -vf
 
 ## Usage
 ```
-usage: tagore.py [-h] [--version] -i <input.bed> [-p [output file prefix]] [-v] [-f]
+usage: tagore [-h] [--version] -i <input.bed> [-p [output file prefix]] [-b [hg78/hg38]] [-f] [-v]
 
-tagore: a utility for illustrating human chromosomes
+tagore: a utility for illustrating human chromosomes https://github.com/jordanlab/tagore
 
 optional arguments:
   -h, --help                                              show this help message and exit
-  --version                                               Print the software version.
+  --version                                               Print the software version
   -i <input.bed>, --input <input.bed>                     Input BED-like file
   -p [output file prefix], --prefix [output file prefix]  Output prefix [Default: "out"]
-  -v, --verbose                                           Display verbose output
+  -b [hg78/hg38], --build [hg78/hg38]                     Human genome build to use [Default: hg38]
   -f, --force                                             Overwrite output files if they exist already
+  -v, --verbose                                           Display verbose output
 
 ```
 The input file is a bed-like format, described below.  If an output prefix is not specified, the scripts uses "out" as the default prefix.
