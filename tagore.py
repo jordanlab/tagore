@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -203,6 +203,9 @@ if __name__ == "__main__":
     PARSER.add_argument('-f', '--force', required=False, default=False,
                         help="Overwrite output files if they exist already",
                         action="store_true")
+    PARSER.add_argument('-ofmt', '--oformat', required=False, default='png',
+                        help="Output format for conversion (pdf requires rsvg-convert)",
+                        metavar='[png/pdf]')
     PARSER.add_argument('-v', '--verbose', required=False, default=False,
                         help="Display verbose output",
                         action="store_true")
@@ -214,9 +217,21 @@ if __name__ == "__main__":
     if ARGS.build not in ['hg37', 'hg38']:
         print(f"\033[91mBuild must be either 'hg37' or 'hg38', you supplied {ARGS.build}.\033[0m")
         sys.exit()
-    if shutil.which("rsvg", mode=os.X_OK) is None:
-        print(f"\033[91mCould not find `rsvg` in PATH.\033[0m")
-        sys.exit()
+
+    if shutil.which("rsvg-convert", mode=os.X_OK) is None:
+        if shutil.which("rsvg", mode=os.X_OK) is None:
+            print(f"\033[91mCould not find `rsvg` or `rsvg-convert` in PATH.\033[0m")
+            sys.exit()
+        else:
+            RSVG = True
+            if ARGS.oformat != "png":
+                print(f"\033[93m`rsvg` only supports PNG output, using png\033[0m")
+                ARGS.oformat = "png"
+    else:
+        RSVG = False
+        if ARGS.oformat not in  ["png", "pdf"]:
+            print(f"\033[93m{ARGS.oformat} is not PNG or PDF, using PNG\033[0m")
+            ARGS.oformat = "png"
     BASE_PATH = os.path.join(sys.prefix, 'lib', 'tagore-data', 'base.svg.p')
     try:
         BASE = open(BASE_PATH, 'rb')
@@ -236,11 +251,17 @@ if __name__ == "__main__":
     else:
         printif(f"\033[94mSaving to: {ARGS.prefix}.svg\033[0m", ARGS.verbose)
     draw(ARGS)
-    printif(f"\033[94mConverting {ARGS.prefix}.svg -> {ARGS.prefix}.png\033[0m", ARGS.verbose)
+    printif(f"\033[94mConverting {ARGS.prefix}.svg -> {ARGS.prefix}.{ARGS.oformat} \033[0m",
+            ARGS.verbose)
     try:
-        subprocess.check_output(f"rsvg {ARGS.prefix}.svg {ARGS.prefix}.png", shell=True)
+        if RSVG:
+            subprocess.check_output(f"rsvg {ARGS.prefix}.svg {ARGS.prefix}.{ARGS.oformat} ",
+                                    shell=True)
+        else:
+            subprocess.check_output(f"rsvg-convert -o {ARGS.prefix}.{ARGS.oformat} -f {ARGS.oformat} {ARGS.prefix}.svg ", shell=True)
     except subprocess.CalledProcessError as rsvg_e:
         printif(f"\033[91mFailed SVG to PNG conversion...\033[0m", ARGS.verbose)
         raise rsvg_e
     finally:
-        printif(f"\033[92mSuccessfully converted SVG to PNG\033[0m", ARGS.verbose)
+        printif(f"\033[92mSuccessfully converted SVG to {ARGS.oformat.upper()}\033[0m",
+                ARGS.verbose)
