@@ -64,7 +64,7 @@ A more complete example of a full chromosome painting using an RFMix output can 
 	--chr2 example_ideogram/1KGP-MXL104_chr2.bed \
 	--out example_ideogram/1KGP-MXL104_tagore.bed
 
-tagore -input example_ideogram/1KGP-MXL104_tagore.bed \
+tagore --input example_ideogram/1KGP-MXL104_tagore.bed \
 	--prefix example_ideogram/1KGP-MXL104 \
   --build hg37
   --verbose
