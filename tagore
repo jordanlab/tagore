@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = '1.0.2a'
+VERSION = '1.1.0'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
