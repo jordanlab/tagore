@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -238,8 +238,12 @@ if __name__ == "__main__":
     try:
         BASE = open(BASE_PATH, 'rb')
     except (IOError, EOFError) as base_e:
-        print(f"\033[91mCould not open {BASE_PATH}.  Please reinstall tagore\033[0m")
-        raise base_e
+        BASE_PATH = os.path.join(site.USER_BASE, 'lib', 'tagore-data', 'base.svg.p')
+        try:
+            BASE = open(BASE_PATH, 'rb')
+        except (IOError, EOFError) as base_e:
+            print(f"\033[91mCould not open {BASE_PATH}.  Please reinstall tagore\033[0m")
+            raise base_e
     __head__, __tail__ = pickle.load(BASE)
     printif(f"\033[94mDrawing chromosome ideogram using {ARGS.input}\033[0m", ARGS.verbose)
     if os.path.exists(f"{ARGS.prefix}.svg") and ARGS.force is False:
