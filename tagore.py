@@ -16,7 +16,7 @@ import sys
 from argparse import ArgumentParser, HelpFormatter
 
 
-VERSION = '1.0.2'
+VERSION = '1.1.1'
 
 COORDINATES = {
     "1": {"cx": 128.6, "cy": 1.5, "ht": 1654.5, "width": 118.6},
@@ -232,7 +232,7 @@ if __name__ == "__main__":
         if ARGS.oformat not in  ["png", "pdf"]:
             print(f"\033[93m{ARGS.oformat} is not PNG or PDF, using PNG\033[0m")
             ARGS.oformat = "png"
-    BASE_PATH = os.path.join(sys.prefix, 'lib', 'tagore-data', 'base.svg.p')
+    BASE_PATH = os.path.join(sys.exec_prefix, 'lib', 'tagore-data', 'base.svg.p')
     try:
         BASE = open(BASE_PATH, 'rb')
     except (IOError, EOFError) as base_e:
