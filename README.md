@@ -21,7 +21,7 @@
 ```bash
 pip install tagore
 tagore --version
-# tagore (version 1.0.1)
+# tagore (version 1.1.2)
 ```
 
 ### Requirements
@@ -60,13 +60,13 @@ Helper scripts for converting RFMix and ADMIXTURE outputs are included in the `s
 A more complete example of a full chromosome painting using an RFMix output can be seen by running:
 
 ```bash
-./scripts/rfmix2tagore.py --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
+rfmix2tagore --chr1 example_ideogram/1KGP-MXL104_chr1.bed \
 	--chr2 example_ideogram/1KGP-MXL104_chr2.bed \
 	--out example_ideogram/1KGP-MXL104_tagore.bed
 
 tagore --input example_ideogram/1KGP-MXL104_tagore.bed \
 	--prefix example_ideogram/1KGP-MXL104 \
-  --build hg37
+  --build hg37 \
   --verbose
 
 ```
