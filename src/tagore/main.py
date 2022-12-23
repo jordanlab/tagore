@@ -350,9 +350,10 @@ def run():
             print(f"\033[93m{parsed_args.oformat} is not PNG or PDF, using PNG\033[0m")
             parsed_args.oformat = "png"
     svg_pkl_data = pkgutil.get_data("tagore", "base.svg.p")
-    svg_header, svg_footer= pickle.loads(svg_pkl_data)
+    svg_header, svg_footer = pickle.loads(svg_pkl_data)
     printif(
-        f"\033[94mDrawing chromosome ideogram using {parsed_args.input}\033[0m", parsed_args.verbose
+        f"\033[94mDrawing chromosome ideogram using {parsed_args.input}\033[0m",
+        parsed_args.verbose,
     )
     if os.path.exists(f"{parsed_args.prefix}.svg") and parsed_args.force is False:
         print(f"\033[93m'{parsed_args.prefix}.svg' already exists.\033[0m")
@@ -365,7 +366,9 @@ def run():
                 f"\033[94mOverwriting existing file and saving to: {parsed_args.prefix}.svg\033[0m"
             )
     else:
-        printif(f"\033[94mSaving to: {parsed_args.prefix}.svg\033[0m", parsed_args.verbose)
+        printif(
+            f"\033[94mSaving to: {parsed_args.prefix}.svg\033[0m", parsed_args.verbose
+        )
     draw(parsed_args, svg_header, svg_footer)
     printif(
         f"\033[94mConverting {parsed_args.prefix}.svg -> {parsed_args.prefix}.{parsed_args.oformat} \033[0m",
@@ -374,7 +377,8 @@ def run():
     try:
         if is_rsvg_installed:
             subprocess.check_output(
-                f"rsvg {parsed_args.prefix}.svg {parsed_args.prefix}.{parsed_args.oformat} ", shell=True
+                f"rsvg {parsed_args.prefix}.svg {parsed_args.prefix}.{parsed_args.oformat} ",
+                shell=True,
             )
         else:
             subprocess.check_output(
