@@ -67,7 +67,7 @@ provided by Tagore is generic and can be used to support a wide variety
 of genome feature annotations, including SNVs, indels, CNVs, and
 epigenetic states.
 
-![image](media/image1.png){width="3.1351924759405074in"
+![image](figure_1.png){width="3.1351924759405074in"
 height="4.435643044619423in"}
 
 Figure 1. **Local ancestry ideogram produced by Tagore.** Chromosomal
